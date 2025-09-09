@@ -3,14 +3,20 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { AddComponent } from './components/addTask/add.component';
+import { ListTask } from './components/list-task/list-task.component';
 
 @NgModule({
   declarations: [
-    App
+    App,
+    ListTask,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AddComponent // como es standalone y en angular nuevo se pone aca y no en declaration
+
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

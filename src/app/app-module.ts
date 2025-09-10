@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { AddComponent } from './components/addTask/add.component';
 import { ListTask } from './components/list-task/list-task.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     AddComponent, // como es standalone y en angular nuevo se pone aca y no en declaration
     FormsModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

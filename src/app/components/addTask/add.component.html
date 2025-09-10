@@ -1,9 +1,27 @@
 <h1>Número de tareas: {{numberTask}}</h1>
-<span>Título Tarea: {{tituloTarea}}</span>
+<span>Título Tarea: {{form.get('titulo')?.value}}</span>
 
-<div class="countainer_input">
-    <input (input)="sendTask()" type="text" placeholder="Ingresar tarea" [(ngModel)] ="tituloTarea">
-    <button (click)="sendTask()" [disabled]="activeButton">Ingresar tarea</button>
+<!-- <p *ngIf="myInput.invalid && (myInput.dirty || myInput.touched)">
+    <span *ngIf="myInput.errors?.['required']">Este campo es requerido</span>
+</p>
+
+<form class="countainer_input" #myForm = "ngForm" (ngSubmit)="sendData(myForm)">
+    <input type="text" placeholder="Ingresar tarea" [(ngModel)]="tituloTarea" #myInput ="ngModel" name="tituloTarea" required>
+    <button type="submit" [disabled]="!myInput.valid">Ingresar tarea</button>
+</form>
+
+{{ myInput.valid }} -->
+
+<div *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
+    <small *ngIf="form.get('titulo')?.errors?.['required']">
+        El Titulo es requirido
+    </small>
+    <small *ngIf="form.get('titulo')?.errors?.['maxlength']">
+        El máximo de caracteres es de 10
+    </small>
 </div>
 
-<!-- [disabled]="true" -->
+<form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()"> 
+    <input type="text" placeholder="Ingresar tarea" formControlName="titulo">
+    <button type="submit" [disabled]="!form.valid">Ingresar tarea</button>
+</form>

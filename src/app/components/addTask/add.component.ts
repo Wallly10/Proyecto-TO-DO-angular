@@ -33,6 +33,11 @@ export class AddComponent implements OnInit{
     // }
 
     form!: FormGroup;
+    numberTask : number = 3;
+    isActive: boolean = true;
+    taskActive! : boolean ;
+    task: any[] = ['tarea 1', 'tarea 2', 'tarea 3'];
+
 
     constructor(private fb:FormBuilder) {
 
@@ -45,18 +50,15 @@ export class AddComponent implements OnInit{
     }
 
     sendTaskTitle():void{
-        if (this.form.valid) {
-            console.log(this.form.value.titulo);
-            
+        if (this.form.valid && this.form.get('titulo')?.value !== '') {
+            this.taskActive = false;
+            console.log(this.form.value.titulo);          
+        }else{
+            this.taskActive = true;
+
         }
     }
-
-
-
-
-
-
-    numberTask : number = 10;
+   
     tituloTarea : string = '';
     activeButton : boolean = true;
 

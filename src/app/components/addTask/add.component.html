@@ -1,5 +1,7 @@
-<h1>Número de tareas: {{numberTask}}</h1>
-<span>Título Tarea: {{form.get('titulo')?.value}}</span>
+<h1
+    [ngClass]="{'tarea1-5' : (numberTask>=1 && numberTask <=5),'tarea5-10' : (numberTask>=6 && numberTask <=10),'tarea10-15' : (numberTask>=11) }">
+    Número de tareas: {{numberTask}}</h1>
+<span [ngStyle]="{'color' : isActive ? 'green' : 'red'}">Título Tarea: {{form.get('titulo')?.value}}</span>
 
 <!-- <p *ngIf="myInput.invalid && (myInput.dirty || myInput.touched)">
     <span *ngIf="myInput.errors?.['required']">Este campo es requerido</span>
@@ -21,7 +23,20 @@
     </small>
 </div>
 
-<form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()"> 
+<!-- <div>
+    <span *ngIf="taskActive">
+        No se puede enviar una tarea sin un titulo
+    </span>
+</div> -->
+
+<hr>
+<h2>Tareas</h2>
+<div *ngFor="let task of task; let i = index">
+      <small>{{ i+1 }} - {{ task }}</small>
+</div>
+<hr>
+
+<form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()">
     <input type="text" placeholder="Ingresar tarea" formControlName="titulo">
     <button type="submit" [disabled]="!form.valid">Ingresar tarea</button>
 </form>

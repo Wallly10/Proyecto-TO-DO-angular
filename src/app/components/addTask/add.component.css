@@ -31,3 +31,14 @@ button{
 button:hover{
     background-color: aliceblue;
 }
+
+
+.tarea1-5{
+    background-color: red;
+}
+.tarea5-10{
+    background-color: orange;
+}
+.tarea10-15{
+    background-color: green;
+}

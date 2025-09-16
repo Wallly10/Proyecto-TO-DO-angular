@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
+import { AfterContentInit, Component, OnDestroy, OnInit, Output, EventEmitter } from "@angular/core";
 import { AppRoutingModule } from "../../app-routing-module";
 import { FormsModule, NgForm, ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { CommonModule } from '@angular/common';
@@ -16,66 +16,13 @@ import { ConfirmeDeleteDirective } from "../../directives/confirm.delete";
 
 export class AddComponent implements OnInit {
 
-    //     constructor(){ 
-    //     console.log("Creandose desde el constructor")
-    // }
-    // implements OnDestroy , AfterContentInit
-    // ngOnInit(): void {  // inicializa datos despues de que el componente se haya creado
-    //     console.log("Creandose desde el ng on Init");
-
-    // }
-
-    // ngOnDestroy(): void {
-    //     console.log("El componente add ha sido destruido");
-
-    // }
-
-    //   ngAfterContentInit(): void {
-    //     console.log("El contenido proyectado ha sido inicializado");
-
-    // }
+    @Output() taskAdded: EventEmitter<task> = new EventEmitter<task>()
 
     form!: FormGroup;
     numberTask!: number ;
-    isActive: boolean = true;
-    taskActive!: boolean;
-    tasks: task[] = [
-        {
-            id: 1,
-            title: 'tarea 1',
-            completed: false
-        },
-        {
-            id: 2,
-            title: 'tarea 2',
-            completed: false
-        },
-        {
-            id: 3,
-            title: 'tarea 3',
-            completed: false
-        },
-        {
-            id: 4,
-            title: 'tarea 4',
-            completed: false
-        },
-        {
-            id: 5,
-            title: 'tarea 5',
-            completed: false
-        },
-        {
-            id: 6,
-            title: 'tarea 6',
-            completed: false
-        },
-        {
-            id: 7,
-            title: 'tarea 7',
-            completed: false
-        }
-    ]
+    // isActive: boolean = true;
+    // taskActive!: boolean;
+    tasks: task[] = []
 
 
     constructor(private fb: FormBuilder) {
@@ -90,42 +37,52 @@ export class AddComponent implements OnInit {
 
     sendTaskTitle(): void {
         if (this.form.valid && this.form.get('titulo')?.value !== '') {
-            this.taskActive = false;
-            console.log(this.form.value.titulo);
-        } else {
-            this.taskActive = true;
-
-        }
+            const newTask: task ={
+                id: Math.floor(Math.random()*1000),
+                title: this.form.value.titulo,
+                completed: false
+            };
+            console.log("EMITIENDO TAREA", newTask); // <--- DEBUG
+            this.taskAdded.emit(newTask);
+            this.form.reset();
+            // this.taskActive = false;
+            // console.log(this.form.value.titulo);
+        } 
+        // else {
+        //     this.taskActive = true;
+        // }
     }
 
-    tituloTarea: string = '';
-    activeButton: boolean = true;
-
-
-    sendData(form: NgForm) {
-        if (form.valid) {
-            console.log(this.tituloTarea);
-        }
-    }
-
-    sendTask() {
-        const tamanioTituloTarea = this.tituloTarea.split('');
-        if (tamanioTituloTarea.length > 0) {
-            this.activeButton = false;
-        } else {
-            this.activeButton = true;
-        }
-
-        console.log(`La tarea se ha enviado con éxito! ${this.tituloTarea}`);
-    }
-
-    markTaskCompleted(task: task): void {
-        task.completed = !task.completed
+      markTaskCompleted(task: task): void {
+        task.completed = !task.completed;
     }
 
     delete(id: number): void {
         this.tasks = this.tasks.filter((task) => task.id !== id);
         this.numberTask = this.tasks.length;
     }
+
+    // tituloTarea: string = '';
+    // activeButton: boolean = true;
+
+
+    // sendData(form: NgForm) {
+    //     if (form.valid) {
+    //         console.log(this.tituloTarea);
+    //     }
+    // }
+
+    // sendTask() {
+    //     const tamanioTituloTarea = this.tituloTarea.split('');
+    //     if (tamanioTituloTarea.length > 0) {
+    //         this.activeButton = false;
+    //     } else {
+    //         this.activeButton = true;
+    //     }
+
+    //     console.log(`La tarea se ha enviado con éxito! ${this.tituloTarea}`);
+    // }
+
+  
 
 }

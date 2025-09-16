@@ -55,42 +55,18 @@ export class App {
 
   cambio: boolean = false
  
-  tasks: task[] = [
-        {
-            id: 1,
-            title: 'tarea 1',
-            completed: false
-        },
-        {
-            id: 2,
-            title: 'tarea 2',
-            completed: false
-        },
-        {
-            id: 3,
-            title: 'tarea 3',
-            completed: false
-        },
-        {
-            id: 4,
-            title: 'tarea 4',
-            completed: false
-        },
-        {
-            id: 5,
-            title: 'tarea 5',
-            completed: false
-        },
-        {
-            id: 6,
-            title: 'tarea 6',
-            completed: false
-        },
-        {
-            id: 7,
-            title: 'tarea 7',
-            completed: false
-        }
-    ]
+  tasks: task[] = []
+
+  addTask(task: task): void{
+    this.tasks.push(task);
+  }
+
+  markTaskCompleted(task:task):void{
+    task.completed = !task.completed;
+  }
+
+  deleteTask (id: number): void{
+    this.tasks = this.tasks.filter((task) => task.id !== id)
+  }
 
 }

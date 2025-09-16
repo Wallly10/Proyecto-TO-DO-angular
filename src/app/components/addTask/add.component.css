@@ -46,7 +46,19 @@ button:hover {
     background-color: green;
 }
 
-.number_task {
+.countainer_advertence {
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: rgb(194, 0, 0);
+    color: rgb(255, 255, 255);
+    position: relative;
+    right: 45%;
+    text-align: center;
+    top: 10px;
+}
+
+/* .number_task {
     position: absolute;
     right: 10px;
     background-color: gray;
@@ -100,4 +112,4 @@ button:hover {
 }
 .countainer_tareas .task .subrayar {
     text-decoration: line-through;
-}
+} */

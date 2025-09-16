@@ -1,4 +1,8 @@
 
-<app-addTask ></app-addTask>
-<app-list-task [listTask]="tasks" [cambio]="cambio"></app-list-task>
+<app-addTask (taskAdded)="addTask($event)"></app-addTask>
+<app-list-task 
+[listTask]="tasks"
+(taskCompleted)="markTaskCompleted($event)"
+(taskDeleted)="deleteTask($event)"
+></app-list-task>
 <router-outlet />

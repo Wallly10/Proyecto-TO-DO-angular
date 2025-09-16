@@ -1,6 +1,6 @@
-<h1 class="number_task"
+<!-- <h1 class="number_task"
     [ngClass]="{'tarea1-5' : (numberTask>=1 && numberTask <=5),'tarea5-10' : (numberTask>=6 && numberTask <=10),'tarea10-15' : (numberTask>=11) }">
-    Número de tareas: {{numberTask}}</h1>
+    Número de tareas: {{numberTask}}</h1> -->
 <!-- <span [ngStyle]="{'color' : isActive ? 'green' : 'red'}">Título Tarea: {{form.get('titulo')?.value}}</span> -->
 
 <!-- <p *ngIf="myInput.invalid && (myInput.dirty || myInput.touched)">
@@ -14,7 +14,7 @@
 
 {{ myInput.valid }} -->
 
-<div *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
+<div class="countainer_advertence" *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
     <small *ngIf="form.get('titulo')?.errors?.['required']">
         El Titulo es requirido
     </small>

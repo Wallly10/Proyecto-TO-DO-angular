@@ -1,0 +1,45 @@
+.countainer_tareas {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 30px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 450px;
+    min-height: 450px;
+}
+
+.countainer_tareas .task {
+    margin: 10px;
+    font-size: 1.5rem;
+    padding: 10px;
+    border: 2px solid goldenrod;
+    border-radius: 20px;
+    width: 90%;
+    position: relative;
+}
+
+.countainer_tareas .task .task_delete {
+    position: absolute;
+    align-self: center;
+    cursor: pointer;
+    right: 10px;
+    background-color: rgb(200, 0, 0);
+    padding: 10px;
+    color: aliceblue;
+    border: none;
+    outline: none;
+}
+
+.countainer_tareas .task .task_check {
+    position: absolute;
+    align-self: center;
+    right: 1px;
+    cursor: pointer;
+}
+.countainer_tareas .task .subrayar {
+    text-decoration: line-through;
+}

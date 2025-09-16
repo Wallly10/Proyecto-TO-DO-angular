@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { task } from '../../models/task.interface';
 
 @Component({
   selector: 'app-list-task',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   templateUrl: './list-task.component.html',
   styleUrls: ['./list-task.component.css']
 })
-export class ListTask {
+export class ListTask implements OnChanges{
+ 
 
+  @Input('listTask') tasks: task[] = [];
+  @Input('cambio') cambio: boolean = false;
+   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['cambio']) {
+      console.log("Nuevo valor", changes['cambio'].currentValue);
+      
+    }
+  }
 }

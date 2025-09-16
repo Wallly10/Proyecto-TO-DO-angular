@@ -1,82 +1,131 @@
 import { AfterContentInit, Component, OnDestroy, OnInit } from "@angular/core";
 import { AppRoutingModule } from "../../app-routing-module";
-import { FormsModule, NgForm, ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
+import { FormsModule, NgForm, ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators } from "@angular/forms";
 import { CommonModule } from '@angular/common';
+import { task } from "../../models/task.interface";
+import { StatusTask } from "../../directives/status-task";
+import { ConfirmeDeleteDirective } from "../../directives/confirm.delete";
 
 @Component({
-    selector : 'app-addTask', // agregamos el nombre
-    templateUrl : './add.component.html', // agregamos la ruta donde esta el archivo html
-    styleUrls : ['./add.component.css'],
+    selector: 'app-addTask', // agregamos el nombre
+    templateUrl: './add.component.html', // agregamos la ruta donde esta el archivo html
+    styleUrls: ['./add.component.css'],
     standalone: true,
-    imports: [AppRoutingModule, FormsModule, CommonModule,ReactiveFormsModule], // pongo standalone true para poder importarlo en module.ts
+    imports: [AppRoutingModule, FormsModule, CommonModule, ReactiveFormsModule, StatusTask,ConfirmeDeleteDirective], // pongo standalone true para poder importarlo en module.ts
 })
 
-export class AddComponent implements OnInit{
-      
+export class AddComponent implements OnInit {
+
     //     constructor(){ 
     //     console.log("Creandose desde el constructor")
     // }
     // implements OnDestroy , AfterContentInit
     // ngOnInit(): void {  // inicializa datos despues de que el componente se haya creado
     //     console.log("Creandose desde el ng on Init");
-        
+
     // }
 
     // ngOnDestroy(): void {
     //     console.log("El componente add ha sido destruido");
-        
+
     // }
 
     //   ngAfterContentInit(): void {
     //     console.log("El contenido proyectado ha sido inicializado");
-        
+
     // }
 
     form!: FormGroup;
-    numberTask : number = 3;
+    numberTask!: number ;
     isActive: boolean = true;
-    taskActive! : boolean ;
-    task: any[] = ['tarea 1', 'tarea 2', 'tarea 3'];
+    taskActive!: boolean;
+    tasks: task[] = [
+        {
+            id: 1,
+            title: 'tarea 1',
+            completed: false
+        },
+        {
+            id: 2,
+            title: 'tarea 2',
+            completed: false
+        },
+        {
+            id: 3,
+            title: 'tarea 3',
+            completed: false
+        },
+        {
+            id: 4,
+            title: 'tarea 4',
+            completed: false
+        },
+        {
+            id: 5,
+            title: 'tarea 5',
+            completed: false
+        },
+        {
+            id: 6,
+            title: 'tarea 6',
+            completed: false
+        },
+        {
+            id: 7,
+            title: 'tarea 7',
+            completed: false
+        }
+    ]
 
 
-    constructor(private fb:FormBuilder) {
+    constructor(private fb: FormBuilder) {
 
     }
-    
-     ngOnInit(): void {
+
+    ngOnInit(): void {
         this.form = this.fb.group({
             titulo: new FormControl('', [Validators.required, Validators.maxLength(10)])
         });
     }
 
-    sendTaskTitle():void{
+    sendTaskTitle(): void {
         if (this.form.valid && this.form.get('titulo')?.value !== '') {
             this.taskActive = false;
-            console.log(this.form.value.titulo);          
-        }else{
+            console.log(this.form.value.titulo);
+        } else {
             this.taskActive = true;
 
         }
     }
-   
-    tituloTarea : string = '';
-    activeButton : boolean = true;
+
+    tituloTarea: string = '';
+    activeButton: boolean = true;
 
 
-    sendData(form: NgForm){
+    sendData(form: NgForm) {
         if (form.valid) {
             console.log(this.tituloTarea);
         }
     }
 
-    sendTask(){
+    sendTask() {
         const tamanioTituloTarea = this.tituloTarea.split('');
         if (tamanioTituloTarea.length > 0) {
             this.activeButton = false;
-        }else{
+        } else {
             this.activeButton = true;
         }
 
-    console.log(`La tarea se ha enviado con éxito! ${this.tituloTarea}`);
+        console.log(`La tarea se ha enviado con éxito! ${this.tituloTarea}`);
     }
+
+    markTaskCompleted(task: task): void {
+        task.completed = !task.completed
+    }
+
+    delete(id: number): void {
+        this.tasks = this.tasks.filter((task) => task.id !== id);
+        this.numberTask = this.tasks.length;
+    }
+
 }

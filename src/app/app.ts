@@ -1,7 +1,8 @@
-import { AfterContentInit, AfterViewInit, Component, DoCheck, signal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, DoCheck, OnInit, signal } from '@angular/core';
 import { clear } from 'console';
 import { interval } from 'rxjs';
 import { task } from './models/task.interface';
+import { Tasks } from './services/tasks';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,8 @@ import { task } from './models/task.interface';
   standalone: false,
   styleUrl: './app.css'
 })
-export class App {
- 
+export class App implements OnInit{
+
   // protected readonly title = signal('mi-proyecto');
   // ngAfterViewInit(): void implements AfterViewInit {
   //   console.log("Han sido inicializadas la vista del componente y las vistas de los hijos");
@@ -54,19 +55,28 @@ export class App {
   // }
 
   cambio: boolean = false
- 
-  tasks: task[] = []
+  tasks: task[] = [];
 
-  addTask(task: task): void{
-    this.tasks.push(task);
+  constructor(private service: Tasks) {
   }
 
-  markTaskCompleted(task:task):void{
-    task.completed = !task.completed;
+  ngOnInit(): void {
+    this.tasks = this.service.getTask()
   }
 
-  deleteTask (id: number): void{
-    this.tasks = this.tasks.filter((task) => task.id !== id)
+  addTask(task: task): void {
+    // this.tasks.push(task);
+    this.service.addTask(task);
+  }
+
+  markTaskCompleted(task: task): void {
+    // task.completed = !task.completed;
+    this.service.completeTask(task.id);
+  }
+
+  deleteTask(id: number): void {
+    // this.tasks = this.tasks.filter((task) => task.id !== id)
+    this.service.deleteTask(id);
   }
 
 }

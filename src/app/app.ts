@@ -1,8 +1,9 @@
-import { AfterContentInit, AfterViewInit, Component, DoCheck, OnInit, signal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, DoCheck, OnDestroy, OnInit, signal } from '@angular/core';
 import { clear } from 'console';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { task } from './models/task.interface';
 import { Tasks } from './services/tasks';
+import { Api } from './services/api';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Tasks } from './services/tasks';
   standalone: false,
   styleUrl: './app.css'
 })
-export class App implements OnInit{
+export class App implements OnInit, OnDestroy{
 
   // protected readonly title = signal('mi-proyecto');
   // ngAfterViewInit(): void implements AfterViewInit {
@@ -56,12 +57,34 @@ export class App implements OnInit{
 
   cambio: boolean = false
   tasks: task[] = [];
+  taskUpload: task[] = [];
+  private subscription!: Subscription;
 
-  constructor(private service: Tasks) {
+
+  constructor(private service: Tasks, private serviceAPI: Api ) {
+    this.subscription = this.service.taskChanged.subscribe(task => {
+      this.tasks = task;
+    })
   }
+ 
 
   ngOnInit(): void {
     this.tasks = this.service.getTask()
+
+    this.serviceAPI.loadTask().subscribe(
+      data => {
+        if (Array.isArray(data)) {
+            this.taskUpload = data;
+        }
+      },
+      error =>{
+        console.error("Error al cargar las tareas desde la API", error)
+      }
+    )
+  }
+
+   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   addTask(task: task): void {

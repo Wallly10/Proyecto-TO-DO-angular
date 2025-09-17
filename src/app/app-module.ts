@@ -7,6 +7,7 @@ import { ListTask } from './components/list-task/list-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusTask } from './directives/status-task';
 import { ConfirmeDeleteDirective } from './directives/confirm.delete';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ConfirmeDeleteDirective } from './directives/confirm.delete';
     FormsModule,
     ReactiveFormsModule,
     StatusTask,
-    ConfirmeDeleteDirective
+    ConfirmeDeleteDirective,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

@@ -1,16 +1,33 @@
-<h1 class="number_task">Número de tareas: {{this.tasks.length}}</h1>
+<h1 class="number_task">
+    Número de tareas: {{this.tasks.length}}</h1>
 <h2 class="titulo">Tareas</h2>
-<div class="countainer_tareas" [ngStyle]="{'justify-content' : tasks.length === 0 ? 'center' : ''}">
-    <div class="task" *ngFor="let task of tasks; let i = index">
-        <small>
-        {{ task.id }}
-        </small>
-        <span [ngClass]="{'subrayar' : task.completed}" [appStatusTask]="task.completed">{{ task.title }}</span>
-        <input class="task_check" type="checkbox" [checked]="task.completed" (change)="completedTask(task)">
-        <button class="task_delete" (click)="deleteTask(task.id)" [appConfirmeDelete]="task.title">Eliminar</button>
+
+<div class="flex">
+    <div class="countainer_tareas" [ngStyle]="{'justify-content' : tasks.length === 0 ? 'center' : ''}">
+        <div class="task" *ngFor="let task of tasks; let i = index">
+            <small>
+                {{ task.id }}
+            </small>
+            <span [ngClass]="{'subrayar' : task.completed}" [appStatusTask]="task.completed">{{ task.title }}</span>
+            <input class="task_check" type="checkbox" [checked]="task.completed" (change)="completedTask(task)">
+            <button class="task_delete" (click)="deleteTask(task.id)" [appConfirmeDelete]="task.title">Eliminar</button>
+        </div>
+        <span [ngStyle]="{'color' : 'black' , 'font-size' : '2rem'}" *ngIf="tasks.length === 0">
+            ¡No hay tareas!
+        </span>
     </div>
-    <span [ngStyle]="{'color' : 'black' , 'font-size' : '2rem'}" *ngIf="tasks.length === 0">
-        ¡No hay tareas!
-        
-    </span>
+
+    <div class="countainer_tareas">
+        <div class="task" *ngFor="let task of taskUpload; let i = index">
+            <small>
+                <span class="status" [appStatusTask]="task.completed" *ngIf="!task.completed">
+                    Pendiente
+                </span>
+                <span class="statusTrue" [appStatusTask]="task.completed" *ngIf="task.completed">
+                    Pendiente
+                </span>
+                {{ task.title }}
+            </small>
+        </div>
+    </div>
 </div>

@@ -11,6 +11,7 @@ export class ListTask implements OnChanges{
  
 
   @Input('listTask') tasks: task[] = [];
+  @Input() taskUpload : task [] = [];
   @Output() taskCompleted: EventEmitter<task> = new EventEmitter <task>();
   @Output() taskDeleted: EventEmitter<number> = new EventEmitter <number>();
 

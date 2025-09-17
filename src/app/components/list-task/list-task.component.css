@@ -7,11 +7,19 @@
 .number_task {
     position: absolute;
     right: 10px;
+    top: 10px;
     background-color: gray;
     color: white;
     padding: 20px;
     border-radius: 20px;
-    font-size: 2rem;
+    font-size: 1.5rem;
+}
+
+/* .flex.countainer_tareas .task{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    
 }
 
 .countainer_tareas {
@@ -31,7 +39,7 @@
 .countainer_tareas .task {
     margin: 10px;
     font-size: 1.5rem;
-    padding: 10px;
+    padding: 30px;
     border: 2px solid goldenrod;
     border-radius: 20px;
     width: 90%;
@@ -59,5 +67,70 @@
 }
 .countainer_tareas .task .subrayar {
     text-decoration: line-through;
+} */
+
+.flex {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+
+  .countainer_tareas {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 30px;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 450px;
+    min-height: 450px;
+
+    .task {
+      display: flex;
+      gap: 20px;
+      margin: 10px;
+      font-size: 1.5rem;
+      padding: 30px;
+      border: 2px solid goldenrod;
+      border-radius: 20px;
+      width: 90%;
+      position: relative;
+    
+      .status{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        border-radius: 10px;
+        padding: 5px;
+      }
+
+      .task_delete {
+        position: absolute;
+        align-self: center;
+        cursor: pointer;
+        right: 10px;
+        background-color: rgb(200, 0, 0);
+        padding: 10px;
+        border-radius: 10px;
+        color: aliceblue;
+        border: none;
+        outline: none;
+      }
+
+      .task_check {
+        position: absolute;
+        align-self: center;
+        right: 100px;
+        cursor: pointer;
+      }
+
+      .subrayar {
+        text-decoration: line-through;
+      }
+    }
+  }
 }
 

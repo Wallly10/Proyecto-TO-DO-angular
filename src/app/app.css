@@ -1,0 +1,18 @@
+.add_button {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    padding: 20px;
+    border-radius: 20px;
+    width: auto;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: none;
+
+    transition: 1s ease;
+
+}
+
+.add_button:hover {
+    background-color: cadetblue;
+}

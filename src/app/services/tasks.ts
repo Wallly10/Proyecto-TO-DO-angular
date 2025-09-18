@@ -52,6 +52,19 @@ export class Tasks {
     }
   }
 
+  editTask(updateTask: task): void{
+    const index = this.tasks.findIndex(task => task.id === updateTask.id);
+    if (index !== -1) {
+      this.tasks[index] = {...updateTask}
+      this.setLocalStorage();
+      this.taskChanged.next(this.tasks.slice());
+    }
+  }
+
+  getTaskById(id: number): task | undefined {
+    return this.tasks.find(task => task.id ===id);
+  }
+
   setLocalStorage() {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('tasks', JSON.stringify(this.tasks));

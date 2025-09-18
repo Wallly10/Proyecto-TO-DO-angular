@@ -1,0 +1,14 @@
+<h1 class="task_id">Editar Tarea : {{taskId}}
+</h1>
+<div class="countainer_advertence" *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
+    <small *ngIf="form.get('titulo')?.errors?.['required']">
+        El Titulo para actualizar la tarea es requirido
+    </small>
+    <small *ngIf="form.get('titulo')?.errors?.['maxlength']">
+        El máximo de caracteres es de 20
+    </small>
+</div>
+<form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()">
+    <input type="text" placeholder="Ingresar nuevo nombre de tarea" formControlName="titulo">
+    <button type="submit" [disabled]="!form.valid">actualizar</button>
+</form>

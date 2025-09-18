@@ -4,6 +4,7 @@ import { interval, Subscription } from 'rxjs';
 import { task } from './models/task.interface';
 import { Tasks } from './services/tasks';
 import { Api } from './services/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -59,9 +60,10 @@ export class App implements OnInit, OnDestroy{
   tasks: task[] = [];
   taskUpload: task[] = [];
   private subscription!: Subscription;
+  open : boolean = false;
 
 
-  constructor(private service: Tasks, private serviceAPI: Api ) {
+  constructor(private service: Tasks, private router: Router) {
     this.subscription = this.service.taskChanged.subscribe(task => {
       this.tasks = task;
     })
@@ -70,26 +72,21 @@ export class App implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.tasks = this.service.getTask()
-
-    this.serviceAPI.loadTask().subscribe(
-      data => {
-        if (Array.isArray(data)) {
-            this.taskUpload = data;
-        }
-      },
-      error =>{
-        console.error("Error al cargar las tareas desde la API", error)
-      }
-    )
+   
   }
 
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   addTask(task: task): void {
     // this.tasks.push(task);
     this.service.addTask(task);
+  }
+
+  openTask(): void{
+    this.open = true;
+    this.router.navigate(['/create']);
   }
 
   markTaskCompleted(task: task): void {

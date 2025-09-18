@@ -15,60 +15,6 @@
     font-size: 1.5rem;
 }
 
-/* .flex.countainer_tareas .task{
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    
-}
-
-.countainer_tareas {
-    margin: 0 auto;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: gainsboro;
-    border-radius: 30px;
-    padding: 20px;
-    overflow-y: auto;
-    max-height: 450px;
-    min-height: 450px;
-}
-
-.countainer_tareas .task {
-    margin: 10px;
-    font-size: 1.5rem;
-    padding: 30px;
-    border: 2px solid goldenrod;
-    border-radius: 20px;
-    width: 90%;
-    position: relative;
-}
-
-.countainer_tareas .task .task_delete {
-    position: absolute;
-    align-self: center;
-    cursor: pointer;
-    right: 10px;
-    background-color: rgb(200, 0, 0);
-    padding: 10px;
-    border-radius: 10px;
-    color: aliceblue;
-    border: none;
-    outline: none;
-}
-
-.countainer_tareas .task .task_check {
-    position: absolute;
-    align-self: center;
-    right: 100px;
-    cursor: pointer;
-}
-.countainer_tareas .task .subrayar {
-    text-decoration: line-through;
-} */
-
 .flex {
   display: flex;
   gap: 20px;
@@ -85,6 +31,7 @@
     border-radius: 30px;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 450px;
     min-height: 450px;
 
@@ -94,17 +41,20 @@
       margin: 10px;
       font-size: 1.5rem;
       padding: 30px;
-      border: 2px solid goldenrod;
+      box-shadow: 5px 5px 10px #757575;
       border-radius: 20px;
       width: 90%;
       position: relative;
-    
+
       .status{
         position: absolute;
-        right: 10px;
-        top: 10px;
+        right: 30%;
+        width: auto;
+        align-self: center;
         border-radius: 10px;
-        padding: 5px;
+        padding: 10px;
+        font-size: 50%;
+        color: aliceblue;
       }
 
       .task_delete {
@@ -120,10 +70,23 @@
         outline: none;
       }
 
+      .task_edit{
+        position: absolute;
+        align-self: center;
+        cursor: pointer;
+        right: 15%;
+        background-color: green;
+        padding: 10px;
+        border-radius: 10px;
+        color: aliceblue;
+        border: none;
+        outline: none;
+      }
+
       .task_check {
         position: absolute;
         align-self: center;
-        right: 100px;
+        right: 25%;
         cursor: pointer;
       }
 
@@ -132,5 +95,9 @@
       }
     }
   }
+}
+
+.flex .countainer_tareas .task:hover {
+  box-shadow: 5px 5px 10px inset #757575;
 }
 

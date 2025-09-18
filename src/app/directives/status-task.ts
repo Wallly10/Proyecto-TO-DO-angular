@@ -12,7 +12,7 @@ export class StatusTask {
     if (!completado) {
       this.renderer.setStyle(this.el.nativeElement, 'background-color', 'red')
     }else{
-      this.renderer.setStyle(this.el.nativeElement, 'background-color', '')
+      this.renderer.setStyle(this.el.nativeElement, 'background-color', 'green')
     }
   }
 

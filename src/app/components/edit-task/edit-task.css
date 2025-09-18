@@ -1,3 +1,8 @@
+.task_id{
+    color: aliceblue;
+}
+
+
 .countainer_input {
     display: flex;
     place-items: center;

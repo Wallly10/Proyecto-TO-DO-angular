@@ -5,6 +5,7 @@ html{
 }
 
 body{
+    box-sizing: border-box;
     overflow: hidden;
     margin: 70px;
     background-color: rgb(40, 40, 40);

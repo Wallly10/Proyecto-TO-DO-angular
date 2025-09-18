@@ -8,16 +8,23 @@
             <small>
                 {{ task.id }}
             </small>
-            <span [ngClass]="{'subrayar' : task.completed}" [appStatusTask]="task.completed">{{ task.title }}</span>
+            <span class="status" [appStatusTask]="task.completed" *ngIf="!task.completed">
+                    Pendiente
+                </span>
+                <span class="status" [appStatusTask]="task.completed" *ngIf="task.completed">
+                    Completada
+                </span>
+            <span [ngClass]="{'subrayar' : task.completed}">{{ task.title }}</span>
             <input class="task_check" type="checkbox" [checked]="task.completed" (change)="completedTask(task)">
             <button class="task_delete" (click)="deleteTask(task.id)" [appConfirmeDelete]="task.title">Eliminar</button>
+            <button class="task_edit" (click)="editTask(task.id)">Editar</button>
         </div>
         <span [ngStyle]="{'color' : 'black' , 'font-size' : '2rem'}" *ngIf="tasks.length === 0">
             ¡No hay tareas!
         </span>
     </div>
 
-    <div class="countainer_tareas">
+    <!-- <div class="countainer_tareas">
         <div class="task" *ngFor="let task of taskUpload; let i = index">
             <small>
                 <span class="status" [appStatusTask]="task.completed" *ngIf="!task.completed">
@@ -29,5 +36,5 @@
                 {{ task.title }}
             </small>
         </div>
-    </div>
+    </div> -->
 </div>

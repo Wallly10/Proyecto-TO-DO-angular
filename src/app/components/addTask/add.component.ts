@@ -5,13 +5,15 @@ import { CommonModule } from '@angular/common';
 import { task } from "../../models/task.interface";
 import { StatusTask } from "../../directives/status-task";
 import { ConfirmeDeleteDirective } from "../../directives/confirm.delete";
+import { Tasks } from "../../services/tasks";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-addTask', // agregamos el nombre
     templateUrl: './add.component.html', // agregamos la ruta donde esta el archivo html
     styleUrls: ['./add.component.css'],
-    standalone: true,
-    imports: [AppRoutingModule, FormsModule, CommonModule, ReactiveFormsModule, StatusTask,ConfirmeDeleteDirective], // pongo standalone true para poder importarlo en module.ts
+    standalone: false,
+    // imports: [AppRoutingModule, FormsModule, CommonModule, ReactiveFormsModule], // pongo standalone true para poder importarlo en module.ts
 })
 
 export class AddComponent implements OnInit {
@@ -25,13 +27,14 @@ export class AddComponent implements OnInit {
     tasks: task[] = []
 
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private service : Tasks , private router: Router) {
 
     }
 
     ngOnInit(): void {
+        this.numberTask = this.tasks.length;
         this.form = this.fb.group({
-            titulo: new FormControl('', [Validators.required, Validators.maxLength(10)])
+            titulo: new FormControl('', [Validators.required, Validators.maxLength(20)])
         });
     }
 
@@ -42,15 +45,9 @@ export class AddComponent implements OnInit {
                 title: this.form.value.titulo,
                 completed: false
             };
-            console.log("EMITIENDO TAREA", newTask); // <--- DEBUG
-            this.taskAdded.emit(newTask);
-            this.form.reset();
-            // this.taskActive = false;
-            // console.log(this.form.value.titulo);
-        } 
-        // else {
-        //     this.taskActive = true;
-        // }
+            this.service.addTask(newTask);
+            this.router.navigate(['/']);        
+        }      
     }
 
       markTaskCompleted(task: task): void {
@@ -61,28 +58,5 @@ export class AddComponent implements OnInit {
         this.tasks = this.tasks.filter((task) => task.id !== id);
         this.numberTask = this.tasks.length;
     }
-
-    // tituloTarea: string = '';
-    // activeButton: boolean = true;
-
-
-    // sendData(form: NgForm) {
-    //     if (form.valid) {
-    //         console.log(this.tituloTarea);
-    //     }
-    // }
-
-    // sendTask() {
-    //     const tamanioTituloTarea = this.tituloTarea.split('');
-    //     if (tamanioTituloTarea.length > 0) {
-    //         this.activeButton = false;
-    //     } else {
-    //         this.activeButton = true;
-    //     }
-
-    //     console.log(`La tarea se ha enviado con éxito! ${this.tituloTarea}`);
-    // }
-
-  
 
 }

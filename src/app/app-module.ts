@@ -8,17 +8,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusTask } from './directives/status-task';
 import { ConfirmeDeleteDirective } from './directives/confirm.delete';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { EditTask } from './components/edit-task/edit-task';
 
 @NgModule({
   declarations: [
     App,
     ListTask,
-    
+    AddComponent,
+    EditTask,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AddComponent, // como es standalone y en angular nuevo se pone aca y no en declaration
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     StatusTask,

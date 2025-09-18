@@ -1,9 +1,12 @@
 
-<app-addTask (taskAdded)="addTask($event)"></app-addTask>
-<app-list-task 
+<!-- <app-addTask (taskAdded)="addTask($event)"></app-addTask> -->
+<!-- <app-list-task 
 [listTask]="tasks"
 [taskUpload]="taskUpload"
 (taskCompleted)="markTaskCompleted($event)"
 (taskDeleted)="deleteTask($event)"
-></app-list-task>
+></app-list-task> -->
+
+
+<button *ngIf="!open" (click)="openTask()" class="add_button">Agregar Tarea</button>
 <router-outlet />

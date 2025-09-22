@@ -8,7 +8,11 @@ import { Subject } from 'rxjs';
 export class Tasks {
 
   tasks: task[] = [];
+  tasksCompleted: task[] = [];
+  tasksDeleted: task[] = [];
+
   taskChanged = new Subject<task[]>();
+  taskDeletedChanged = new Subject<task[]>();
 
   constructor() {
     this.getTask();
@@ -19,6 +23,16 @@ export class Tasks {
     return this.tasks;
   }
 
+  getTaskDeleted(): task[] {
+    return this.tasksDeleted;
+  }
+
+  getTasksCompleted(): task[] {
+    this.getFromLocalStorage();
+    this.tasksCompleted = this.tasks.filter(task => task.completed === true);
+    return this.tasksCompleted
+  }
+
   addTask(task: task): void {
     this.tasks.push(task);
     this.setLocalStorage();
@@ -26,10 +40,23 @@ export class Tasks {
   }
 
   deleteTask(id: number): void {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
-    this.setLocalStorage();
-    this.taskChanged.next(this.tasks.slice());
+    const taskToDelete = this.tasks.find(task => task.id === id)
+    if (taskToDelete) {
+      this.tasksDeleted.push(taskToDelete);
+      this.tasks = this.tasks.filter((task) => task.id !== id);
+      this.setLocalStorage();
+      this.taskChanged.next(this.tasks.slice());
+    }
+  }
 
+  returnTaskDeleted(task: task): void {
+    if (!this.tasks.some(t => t.id === task.id)) {
+      this.tasks.push(task);
+      this.tasksDeleted = this.tasksDeleted.filter(t => t.id !== task.id);
+      this.taskChanged.next(this.tasks.slice());
+      this.taskDeletedChanged.next(this.tasksDeleted.slice());
+      this.setLocalStorage();
+    }
   }
 
   completeTask(id: number): void {
@@ -49,25 +76,33 @@ export class Tasks {
         this.taskChanged.next(this.tasks.slice());
 
       }
+
+      const deleteTask = localStorage.getItem('tasks deleted')
+      if (deleteTask) {
+        this.tasksDeleted = JSON.parse(deleteTask);
+        this.taskDeletedChanged.next(this.tasksDeleted.slice());
+
+      }
     }
   }
 
-  editTask(updateTask: task): void{
+  editTask(updateTask: task): void {
     const index = this.tasks.findIndex(task => task.id === updateTask.id);
     if (index !== -1) {
-      this.tasks[index] = {...updateTask}
+      this.tasks[index] = { ...updateTask }
       this.setLocalStorage();
       this.taskChanged.next(this.tasks.slice());
     }
   }
 
   getTaskById(id: number): task | undefined {
-    return this.tasks.find(task => task.id ===id);
+    return this.tasks.find(task => task.id === id);
   }
 
   setLocalStorage() {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      localStorage.setItem('tasks deleted', JSON.stringify(this.tasksDeleted));
     }
   }
 

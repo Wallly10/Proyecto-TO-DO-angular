@@ -1,0 +1,39 @@
+
+
+.container_task{
+    box-sizing: border-box;
+    margin-top: 50px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+    border-radius: 30px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 450px;
+    min-height: 450px;
+
+    .task{
+        width: 50%;
+        max-width: max-content;
+        min-width: 50%;
+        height: auto;
+        max-height: 70%;
+        min-height: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .task_Title{
+            font-size: 3rem;
+        }
+        .task_id{
+            font-size: 2rem;
+        }
+    }
+}

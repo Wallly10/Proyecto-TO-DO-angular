@@ -1,4 +1,3 @@
-
 <!-- <app-addTask (taskAdded)="addTask($event)"></app-addTask> -->
 <!-- <app-list-task 
 [listTask]="tasks"
@@ -7,6 +6,11 @@
 (taskDeleted)="deleteTask($event)"
 ></app-list-task> -->
 
+<nav class="tabs">
+    <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Todas</a>
+    <a routerLink="/tasks/completed" routerLinkActive="active">Completadas</a>
+    <a routerLink="/tasks/deleted" routerLinkActive="active">Eliminadas</a>
+</nav>
 
 <button *ngIf="!open" (click)="openTask()" class="add_button">Agregar Tarea</button>
 <router-outlet />

@@ -10,6 +10,9 @@ import { ConfirmeDeleteDirective } from './directives/confirm.delete';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { EditTask } from './components/edit-task/edit-task';
+import { CompletedTasks } from './components/completed-tasks/completed-tasks';
+import { DetailsTasks } from './components/details-tasks/details-tasks';
+import { DeletedTasks } from './components/deleted-tasks/deleted-tasks';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { EditTask } from './components/edit-task/edit-task';
     ListTask,
     AddComponent,
     EditTask,
+    CompletedTasks,
+    DetailsTasks,
+    DeletedTasks,
   
   ],
   imports: [

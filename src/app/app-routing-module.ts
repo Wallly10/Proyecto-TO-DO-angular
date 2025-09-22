@@ -3,11 +3,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListTask } from './components/list-task/list-task.component';
 import { AddComponent } from './components/addTask/add.component';
 import { EditTask } from './components/edit-task/edit-task';
+import { CompletedTasks } from './components/completed-tasks/completed-tasks';
+import { DetailsTasks } from './components/details-tasks/details-tasks';
+import { DeletedTasks } from './components/deleted-tasks/deleted-tasks';
 
 const routes: Routes = [
   {
     path: 'tasks',
-    component: ListTask
+    component: ListTask,
+    children:[
+      {
+        path: 'completed',
+        component: CompletedTasks
+      },
+      {
+        path: 'details/:id',
+        component: DetailsTasks
+      },
+      {
+        path: 'deleted',
+        component: DeletedTasks
+      }
+    ]
   },
   {
     path: 'create',

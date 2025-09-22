@@ -8,11 +8,29 @@
     background-color: aliceblue;
     cursor: pointer;
     border: none;
-
     transition: 1s ease;
-
 }
 
 .add_button:hover {
     background-color: cadetblue;
+}
+
+.tabs{
+    width: auto;
+    height: auto;
+    padding: 10px;
+    position: absolute;
+    left: 20px;
+    top: 70px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+
+    a{
+        text-decoration: none;
+        color: grey;
+    }
+    .active{
+        color: white;
+    }
 }

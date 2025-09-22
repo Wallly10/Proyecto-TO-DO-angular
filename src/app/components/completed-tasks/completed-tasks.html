@@ -1,0 +1,26 @@
+
+<h1 class="number_task">
+    Número de tareas Completadas: {{this.tasksCompleted.length}}</h1>
+<h2 class="titulo">Tareas</h2>
+
+<div class="flex">
+    <div class="countainer_tareas" [ngStyle]="{'justify-content' : tasksCompleted.length === 0 ? 'center' : ''}">
+        <div class="task" *ngFor="let task of tasksCompleted; let i = index">
+            <small>
+                {{ task.id }}
+            </small>
+            <span class="status" [appStatusTask]="task.completed" *ngIf="!task.completed">
+                    Pendiente
+                </span>
+                <span class="status" [appStatusTask]="task.completed" *ngIf="task.completed">
+                    Completada
+                </span>
+            <span [ngClass]="{'subrayar' : task.completed}">{{ task.title }}</span>
+           
+        </div>
+        <span [ngStyle]="{'color' : 'black' , 'font-size' : '2rem'}" *ngIf="tasksCompleted.length === 0">
+            ¡No hay tareas Completadas!
+        </span>
+    </div>
+
+</div>

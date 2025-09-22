@@ -34,12 +34,14 @@ export class EditTask {
   ngOnInit(): void {
     this.numberTask = this.tasks.length;
     this.form = this.fb.group({
-      titulo: new FormControl('', [Validators.required, Validators.maxLength(20)])
+      titulo: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      description: new FormControl('', Validators.required)
+
     });
 
     this.taskId = this.route.snapshot.paramMap.get('id');
     if (this.taskId) {
-      this.task = this.service.getTaskById(parseInt(this.taskId,10))
+      this.task = this.service.getTaskById(parseInt(this.taskId, 10))
       if (this.task) {
         this.form.patchValue({
           titulo: this.task.title
@@ -49,11 +51,12 @@ export class EditTask {
   }
 
   sendTaskTitle(): void {
-    if (this.form.valid && this.taskId &&this.form.get('titulo')?.value !== '') {
+    if (this.form.valid && this.taskId && this.form.get('titulo')?.value !== '') {
       const updateTask: task = {
-        id: parseInt(this.taskId,10),
+        id: parseInt(this.taskId, 10),
         title: this.form.value.titulo,
-        completed: this.task ? this.task.completed:false
+        description: this.form.value.description,
+        completed: this.task ? this.task.completed : false
       };
       this.service.editTask(updateTask);
       this.router.navigate(['/tasks']);

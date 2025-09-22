@@ -5,22 +5,37 @@
 
 .countainer_input {
     display: flex;
+    flex-direction: column;
     place-items: center;
     justify-content: center;
-    width: 100%;
-    height: 20vh;
-    padding: 10px;
+    justify-self: center;
+    gap: 20px;
+    width: 90%;
+    height: auto;
+    padding: 20px;
     border: solid 1px #505050;
     border-radius: 30px;
     box-shadow: 10px 10px 10px  #505050;
 
 
     input {
-        width: 80%;
-        padding: 10px;
+        width: 90%;
+        padding: 20px;
         border: 1 px solid #e4e4e4;
         outline: none;
         border-radius: 20px;
+    }
+
+       textarea {
+        width: 90%;
+        padding: 20px;
+        border-radius: 20px;
+        resize: none;
+        height: 200px;
+        
+        &::placeholder {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
     }
 
     button {

@@ -1,3 +1,5 @@
+<ng-container *ngIf="view">
+
 <h1 class="number_task">
     Número de tareas: {{this.tasks.length}}</h1>
 <h2 class="titulo">Tareas</h2>
@@ -16,6 +18,7 @@
                 </span>
             <span [ngClass]="{'subrayar' : task.completed}">{{ task.title }}</span>
             <input class="task_check" type="checkbox" [checked]="task.completed" (change)="completedTask(task)">
+            <button class="task_details" (click)="detailsTask(task.id)">Detalles</button>
             <button class="task_delete" (click)="deleteTask(task.id)" [appConfirmeDelete]="task.title">Eliminar</button>
             <button class="task_edit" (click)="editTask(task.id)">Editar</button>
         </div>
@@ -38,3 +41,5 @@
         </div>
     </div> -->
 </div>
+</ng-container>
+<router-outlet></router-outlet>

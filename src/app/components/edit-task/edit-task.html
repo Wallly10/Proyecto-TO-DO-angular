@@ -10,5 +10,6 @@
 </div>
 <form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()">
     <input type="text" placeholder="Ingresar nuevo nombre de tarea" formControlName="titulo">
+    <textarea placeholder="Ingresar la nueva descripcion de la tarea" formControlName="description"></textarea>
     <button type="submit" [disabled]="!form.valid">actualizar</button>
 </form>

@@ -6,6 +6,7 @@ html{
 
 body{
     box-sizing: border-box;
+    max-height: 90vh;
     overflow: hidden;
     margin: 70px;
     background-color: rgb(40, 40, 40);

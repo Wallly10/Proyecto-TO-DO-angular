@@ -10,41 +10,55 @@ import { Router } from '@angular/router';
   templateUrl: './list-task.component.html',
   styleUrls: ['./list-task.component.css']
 })
-export class ListTask implements OnChanges{
- 
+export class ListTask implements OnChanges {
+
 
   tasks: task[] = [];
-  taskUpload : task [] = [];
-  private subscription! : Subscription;
+  taskUpload: task[] = [];
+  private subscription!: Subscription;
+  view: boolean = true;
 
   // @Output() taskCompleted: EventEmitter<task> = new EventEmitter <task>();
   // @Output() taskDeleted: EventEmitter<number> = new EventEmitter <number>();
 
-  constructor(private service: Tasks , private router: Router) {
+  constructor(private service: Tasks, private router: Router) {
     this.tasks = this.service.getTask()
     this.subscription = this.service.taskChanged.subscribe(task => {
       this.tasks = task;
     })
+
+    this.router.events.subscribe(() => {
+      if (this.router.url !== '/tasks') {
+        this.view = false;
+      } else {
+        this.view = true;
+      }
+    })
   }
 
-  completedTask(task: task): void{
+  completedTask(task: task): void {
     this.service.completeTask(task.id);
   }
 
-  deleteTask(id: number): void{
+  deleteTask(id: number): void {
     this.service.deleteTask(id);
   }
 
-  editTask(id:number): void{
+  editTask(id: number): void {
     this.router.navigate([`/edit/${id}`]);
+  }
+
+  detailsTask(id: number): void{
+    console.log(id);
+    this.router.navigate([`tasks/details/${id}`]);
   }
 
 
   @Input('cambio') cambio: boolean = false;
-   ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['cambio']) {
       console.log("Nuevo valor", changes['cambio'].currentValue);
-      
+
     }
   }
 }

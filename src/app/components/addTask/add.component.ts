@@ -34,7 +34,8 @@ export class AddComponent implements OnInit {
     ngOnInit(): void {
         this.numberTask = this.tasks.length;
         this.form = this.fb.group({
-            titulo: new FormControl('', [Validators.required, Validators.maxLength(20)])
+            titulo: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+            description: new FormControl('',Validators.required)
         });
     }
 
@@ -43,6 +44,7 @@ export class AddComponent implements OnInit {
             const newTask: task ={
                 id: Math.floor(Math.random()*1000),
                 title: this.form.value.titulo,
+                description: this.form.value.description,
                 completed: false
             };
             this.service.addTask(newTask);

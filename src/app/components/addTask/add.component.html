@@ -14,7 +14,8 @@
 
 {{ myInput.valid }} -->
 
-<div class="countainer_advertence" *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
+<div class="countainer_advertence"
+    *ngIf="form.get('titulo')?.invalid && (form.get('titulo')?.dirty || form.get('titulo')?.touched)">
     <small *ngIf="form.get('titulo')?.errors?.['required']">
         El Titulo es requirido
     </small>
@@ -45,5 +46,6 @@
 
 <form class="countainer_input" [formGroup]="form" (ngSubmit)="sendTaskTitle()">
     <input type="text" placeholder="Ingresar tarea" formControlName="titulo">
+    <textarea placeholder="Ingresar la descripcion de la tarea" formControlName="description"></textarea>
     <button type="submit" [disabled]="!form.valid">Ingresar tarea</button>
 </form>

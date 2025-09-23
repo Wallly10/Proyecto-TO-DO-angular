@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   standalone: false,
   styleUrl: './app.css'
 })
-export class App implements OnInit, OnDestroy{
+export class App implements OnInit, OnDestroy {
 
   // protected readonly title = signal('mi-proyecto');
   // ngAfterViewInit(): void implements AfterViewInit {
@@ -60,19 +60,27 @@ export class App implements OnInit, OnDestroy{
   tasks: task[] = [];
   taskUpload: task[] = [];
   private subscription!: Subscription;
-  open : boolean = false;
+  open: boolean = false;
+  view: boolean = true;
 
 
   constructor(private service: Tasks, private router: Router) {
     this.subscription = this.service.taskChanged.subscribe(task => {
       this.tasks = task;
     })
+    this.router.events.subscribe(() => {
+      if (this.router.url !== '/tasks') {
+        this.view = false;
+      } if (this.router.url === '/tasks/completed' || this.router.url === '/tasks/deleted' || this.router.url === '/tasks') {
+        this.view = true;
+      }
+    })
   }
- 
+
 
   ngOnInit(): void {
     this.tasks = this.service.getTask()
-   
+
   }
 
   ngOnDestroy(): void {
@@ -84,7 +92,7 @@ export class App implements OnInit, OnDestroy{
     this.service.addTask(task);
   }
 
-  openTask(): void{
+  openTask(): void {
     this.open = true;
     this.router.navigate(['/create']);
   }

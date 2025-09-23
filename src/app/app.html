@@ -5,7 +5,7 @@
 (taskCompleted)="markTaskCompleted($event)"
 (taskDeleted)="deleteTask($event)"
 ></app-list-task> -->
-
+<ng-container *ngIf="view">
 <nav class="tabs">
     <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Todas</a>
     <a routerLink="/tasks/completed" routerLinkActive="active">Completadas</a>
@@ -13,4 +13,5 @@
 </nav>
 
 <button *ngIf="!open" (click)="openTask()" class="add_button">Agregar Tarea</button>
+</ng-container>
 <router-outlet />

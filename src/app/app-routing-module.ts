@@ -15,9 +15,9 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: ListTask,
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuardChild],
-    canDeactivate: [CanDeactivateGuard],
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuardChild],
+    // canDeactivate: [CanDeactivateGuard],
     children: [
       {
         path: 'completed',
@@ -43,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/tasks',
     pathMatch: 'full'
   },
   {
